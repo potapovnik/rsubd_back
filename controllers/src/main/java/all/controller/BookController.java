@@ -53,6 +53,10 @@ public class BookController {
     }
     @PutMapping("")
     public void updateBook(@RequestBody Book book){
+        if (book.getReader_id()!=null)
+            if (book.getReader_id()==0){
+                book.setReader_id(null);
+            }
         int bookCount=bookService.update(book);
         if (bookCount<=0){
             throw new IllegalArgumentException();
